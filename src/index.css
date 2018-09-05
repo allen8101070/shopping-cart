@@ -1,0 +1,61 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Microsoft JhengHei !important;
+}
+
+
+/* 與下一步按鈕 相同的顏色*/
+.remove-cart {
+    padding: 0px;
+    line-height: 3em;
+}
+
+.remove-cart button {
+    color: red;
+    width: 100%;
+    height: auto;
+    outline: 0;
+    border: 0;
+    font-size: 18px;
+    background: transparent;
+    cursor: pointer;
+    padding: 0px;
+}
+
+.check-out {
+    width: 300px;
+    font-size: 20px;
+}
+
+.total-price {
+    color: #dc3545;
+}
+.cart-line-height{
+  line-height: 60px;
+}
+.cart-line-height img{
+  max-width: 100px;
+  height: auto;
+}
+/* .add-to-cart{
+    
+
+} */
+@media (max-width: 768px) {
+    .amount {
+        margin-bottom: 1em;
+        padding-right: 0px;
+    }
+}
+
+@media (max-width: 1281px) {
+    .box-shadow:hover {
+        box-shadow: none;
+    }
+}
+/* @media (max-width: 992px) {
+    .add-to-cart{
+        width: 100%;
+    }
+} */
