@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 
 class CartItem extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            // selectValue: this.props.cart.amout
-        };
-    }
+
     // event捕捉 改變state內定義select的值
     handleChange = (product,event) => {
         // 將select取得的數量值和此產品物件傳給上層的addToCart
@@ -38,17 +33,15 @@ class CartItem extends Component {
                         value={this.props.cart.amout}
                         onChange={(event) => this.handleChange(this.props.cart,event)}
                     >
-
                         {cartOption.map((val, index) => {
                             return <option key={index} value={val + 1}>{val + 1}</option>
                         })}
-
                     </select>
                 </td>
-                <td>{this.props.cart.price}</td>
-                <td>{this.props.cart.price * this.props.cart.amout}</td>
+                <td>${this.props.cart.price}</td>
+                <td>${this.props.cart.price * this.props.cart.amout}</td>
                 <td className="remove-cart">
-                    <button>×</button>
+                    <button onClick={() => this.props.removeCartItem(this.props.cart)}>×</button>
                 </td>
             </tr>
 

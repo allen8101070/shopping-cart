@@ -22,18 +22,26 @@ const CartOrder = (props) => {
                                 <td>編輯</td>
                             </tr>
 
-                            {props.cart.map((item, index) => {
+                            {props.cart.filter(item => item.amout > 0).map((item, index) => {
                                 return <CartItem
                                     cart={item}
                                     key={index}
+                                    index={index}
                                     addToCart={props.addToCart}
+                                    removeCartItem={props.removeCartItem}
                                 />
                             })}
 
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colSpan={5}><span className="float-left">總計</span><h3 className="total-price float-right">$9000</h3></td>
+                                <td colSpan={5}><span className="float-left">總計</span>
+                                    <h3 className="total-price float-right">
+                                        ${props.cart.reduce(function (previousValue, currentValue) {
+                                            return previousValue + (currentValue.price * currentValue.amout)
+                                        }, 0)}
+                                    </h3>
+                                </td>
                             </tr>
                         </tfoot>
                     </table>
