@@ -57,28 +57,28 @@ class App extends Component {
       addOtherProduct: [
         {
           id: "452793",
-          name: "吸塵器A",
+          name: "加價購-吸塵器A",
           price: 760,
           img: "http://www.hsct.com.tw/upload/products/pgroup01B021602113741.jpg",
           quantity: 5
         },
         {
           id: "452795",
-          name: "吸塵器B",
+          name: "加價購-吸塵器B",
           price: 800,
           img: "http://www.hsct.com.tw/upload/products/pgroup01B021602113741.jpg",
           quantity: 170
         },
         {
           id: "452797",
-          name: "吸塵器C",
+          name: "加價購-吸塵器C",
           price: 990,
           img: "http://www.hsct.com.tw/upload/products/pgroup01B021602113741.jpg",
           quantity: 120
         },
         {
           id: "452896",
-          name: "吸塵器D",
+          name: "加價購-吸塵器D",
           price: 630,
           img: "http://www.hsct.com.tw/upload/products/pgroup01B021602113741.jpg",
           quantity: 6
@@ -89,32 +89,34 @@ class App extends Component {
 
 
   // 添加商品進購物車cart陣列
-  addToCart = (product, quantity) => {
-
-    //將傳入的購物select選項轉成數值
-    quantity = Number(quantity)
+  // 可拆到Reduver做....?
+  // 為何不傳index 還要手動取找index? 因為點擊時能傳入的index是商品陣列而非購物車陣列
+  // 我要取的的是購物車陣列 商品的index位置
+  addToCart = (product, amout) => {
     const newAddCart = this.state.cart;
 
+    amout = Number(amout)
+
     //檢查陣列是某有重複的物件,有重複indexOf就取得其陣列序,沒有indexOf就取得-1
-    let checkArrayIndex = newAddCart.map(item => {
+    let checkCartIndex = newAddCart.map(item => {
       return item.id
     }).indexOf(product.id)
-    console.log(checkArrayIndex)
+    console.log(checkCartIndex)
+
     //若陣列沒有重複物件則新增一個新物件進去
     //若直接把product給push進newAddCart,newAddCart的product會和shopJson給bytefence
-    if (checkArrayIndex === -1) {
+    if (checkCartIndex === -1) {
       let newObj = Object.assign({}, product)
       // 新增屬性amout並給予數量值
-      newObj.amout = quantity
+      newObj.amout = amout
       newAddCart.push(newObj);
       console.log(newAddCart)
     } else {
       //有重複物件就直接改該物件的amout值
-      newAddCart[checkArrayIndex].amout = quantity;
+      newAddCart[checkCartIndex].amout = amout;
     }
 
     console.log(this.state)
-
     this.setState({
       cart: newAddCart
     });
@@ -122,30 +124,31 @@ class App extends Component {
   }
 
   // 移除購物車清單特定品項
+  // 可拆到Reduver做....?
   removeCartItem = (product) => {
-    const newAddCart = this.state.cart;
+    const newRemoveCart = this.state.cart;
 
     //檢查陣列是某有重複的物件,有重複indexOf就取得其陣列序,沒有indexOf就取得-1
-    let checkArrayIndex = newAddCart.map(item => {
+    let checkCartIndex = newRemoveCart.map(item => {
       return item.id
     }).indexOf(product.id)
 
     //若陣列沒有重複物件則新增一個新物件進去
-    //若直接把product給push進newAddCart,newAddCart的product會和shopJson給bytefence
-    if (checkArrayIndex === -1) {
+    //若直接把product給push進newRemoveCart,newRemoveCart的product會和shopJson給bytefence
+    if (checkCartIndex === -1) {
       let newObj = Object.assign({}, product)
       // 屬性amout數量歸0
       newObj.amout = 0
-      newAddCart.push(newObj);
+      newRemoveCart.push(newObj);
     } else {
       //有重複物件就直接改該物件的amout值
-      newAddCart[checkArrayIndex].amout = 0;
+      newRemoveCart[checkCartIndex].amout = 0;
     }
 
     console.log(this.state)
 
     this.setState({
-      cart: newAddCart
+      cart: newRemoveCart
     });
 
   }

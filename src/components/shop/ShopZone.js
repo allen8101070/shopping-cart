@@ -13,7 +13,6 @@ const ShopZone = (props) => {
                         return <ShopItem
                             product={item}
                             key={index}
-                            index={index}
                             addToCart={props.addToCart}
                         />
                     })}

@@ -2,6 +2,12 @@ import React from 'react';
 import CartItem from './CartItem';
 
 const CartOrder = (props) => {
+    let totalMoney = null; // 購物車商品總價
+    let totalProduct = null; // 購物車商品總項
+
+    totalMoney = props.cart.reduce((previous, current) => previous + (current.price * current.amout), 0);
+    totalProduct = props.cart.filter(item => item.amout > 0).length;
+
     return (
         <div className="album py-5">
             <div className="container text-center">
@@ -26,7 +32,6 @@ const CartOrder = (props) => {
                                 return <CartItem
                                     cart={item}
                                     key={index}
-                                    index={index}
                                     addToCart={props.addToCart}
                                     removeCartItem={props.removeCartItem}
                                 />
@@ -35,18 +40,23 @@ const CartOrder = (props) => {
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colSpan={5}><span className="float-left">總計</span>
-                                    <h3 className="total-price float-right">
-                                        ${props.cart.reduce(function (previousValue, currentValue) {
-                                            return previousValue + (currentValue.price * currentValue.amout)
-                                        }, 0)}
+                                <td colSpan={5}>
+                                    <div className="float-left total-amout">總計
+                                        <span className="total"> { totalProduct } </span>項商品
+                                    </div>
+                                    <h3 className="total float-right">
+                                        ${ totalMoney }
                                     </h3>
+                                    
                                 </td>
                             </tr>
                         </tfoot>
                     </table>
                 </div>
-                <button className="btn ml-1 mr-1 mt-3 btn-danger check-out">確認結帳</button>
+                <button className="btn ml-1 mr-1 mt-3 btn-danger check-out"
+                    onClick={ 
+                        ()=> alert("共計" + totalMoney + "元")
+                    }>確認結帳</button>
             </div>
         </div>
     )

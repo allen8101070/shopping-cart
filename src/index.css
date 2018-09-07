@@ -28,8 +28,9 @@ body {
     font-size: 20px;
 }
 
-.total-price {
+.total {
     color: #dc3545;
+    font-weight: 900;
 }
 .cart-line-height{
   line-height: 60px;
@@ -54,8 +55,3 @@ body {
         box-shadow: none;
     }
 }
-/* @media (max-width: 992px) {
-    .add-to-cart{
-        width: 100%;
-    }
-} */

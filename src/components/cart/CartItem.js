@@ -21,6 +21,7 @@ class CartItem extends Component {
             }
         }
 
+
         return (
 
             <tr className="cart-line-height">
